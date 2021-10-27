@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "cmr-umm-updater"
+version = "0.0.0"
+description = "Github action that publishes UMM-S and UMM-T updates to CMR"
+authors = ["podaac-cloud-tva <podaac-cloud-tva@jpl.nasa.gov>"]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/podaac/cmr-umm-updater"
+exclude = ['contrib', 'docs', 'tests']
+packages = [
+    { include = "podaac" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.22"
+importlib-resources = "^5.1.0"
+importlib-metadata = "^3.4.0"
+click = "^7.1.2"
+backoff = "^1.10.0"
+
+[tool.poetry.dev-dependencies]
+sphinx = "^2.2"
+httpretty = "^0.9"
+pylint = "^2.6.0"
+pytest = "^6.2.2"
+pytest-cov = "^2.11.1"
+flake8 = "^3.8.4"
+
+[tool.poetry.scripts]
+"umms_updater" = "podaac.umms_updater.umms_updater:run"
+"ummt_updater" = "podaac.ummt_updater.ummt_updater:run"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

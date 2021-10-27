@@ -1,0 +1,23 @@
+name: 'UMM-S Updater'
+description: 'Publish UMM-S updates to CMR'
+inputs:
+  umm-s-json:
+    description: 'JSON file containing new UMM-S contents'
+    required: true
+  provider:
+    description: 'CMR Provider ID'
+    required: true
+  env:
+    description: 'Venue to update UMM-S in'
+    required: true
+  version:
+    description: 'Service version to be substituted in to UMM-S entry'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{inputs.umm-s-json}}
+    - ${{inputs.provider}}
+    - ${{inputs.env}}
+    - ${{inputs.version}}
