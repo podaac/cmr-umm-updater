@@ -2,7 +2,7 @@
 name = "cmr-umm-updater"
 version = "0.0.1-alpha.0"
 description = "Github action that publishes UMM-S and UMM-T updates to CMR"
-authors = ["https://github.com/orgs/podaac/teams/tva"]
+authors = ["podaac-cloud-tva <podaac-cloud-tva@jpl.nasa.gov>"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/podaac/cmr-umm-updater"
