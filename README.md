@@ -42,6 +42,7 @@ is stored in a Github Secret.
 
 ## Example usage
 
+```yaml
 - uses: actions/checkout@v2
 - name: UMM-S Updater Step
   id: umm-s-updater
@@ -54,3 +55,4 @@ is stored in a Github Secret.
   env:
     cmr_user: ${{secrets.CMR_USER}}
     cmr_pass: ${{secrets.CMR_PASS}}	
+```
