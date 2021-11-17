@@ -67,13 +67,13 @@ def parse_args():
 
     parser.add_argument('-cu', '--cmr_user',
                         help='CMR Username to be used to request token.',
-                        required=True,
+                        required=False,
                         metavar='ssm.get_parameter, '
                                 'parameter["Parameter"]["urs_user"]')
 
     parser.add_argument('-cp', '--cmr_pass',
                         help='CMR Username to be used to request token.',
-                        required=True,
+                        required=False,
                         metavar='ssm.get_parameter, '
                                 'parameter["Parameter"]["urs_password"]')
 
@@ -81,7 +81,7 @@ def parse_args():
                         help='CMR UMM token string.',
                         default=None,
                         required=False,
-                        metavar='')
+                        metavar='Launchpad token or EDL token')
 
     parser.add_argument('-d', '--debug', action='store_true',
                         help='Set logging to debug',
@@ -96,6 +96,8 @@ def parse_args():
                         metavar='associations.txt')
 
     args = parser.parse_args()
+    if not args.token and not(args.cmr_pass and args.cmr_user):
+        parser.error('No credentials provided, add -t or -cu and -cp')
     return args
 
 
@@ -180,7 +182,6 @@ def main(args):
     if args.token is None:
         current_token = token_req.token(args.env, args.cmr_user, args.cmr_pass)
     else:
-        # For local testing
         current_token = args.token
     provider = args.provider
     header = {
