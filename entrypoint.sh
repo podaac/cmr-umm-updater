@@ -20,5 +20,6 @@ if [[ -z "${token}" ]]; then
   umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -t $token
 else
   umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -cu $cmr_user -cp $cmr_pass
+fi
 
 set -x
