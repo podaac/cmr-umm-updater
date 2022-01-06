@@ -30,7 +30,7 @@ UMM-S JSON before pushing to CMR.
 
 ## Environment variables
 
-**Required** Either cmr_user and cmr_pass or token
+**Required** Either cmr_user and cmr_pass or token for each environment `sit` `uat` `ops`
 
 ### `cmr_user`
 
@@ -42,9 +42,19 @@ is stored in a Github Secret.
 A Github secret containing CMR password. We recommend this 
 is stored in a Github Secret.
 
-### `token`
+### `LAUNCHPAD_TOKEN_SIT`
 
-A Github secret containing Launchpad token. We recommend this 
+A Github secret containing Launchpad token for sit. We recommend this 
+is stored in a Github Secret.
+
+### `LAUNCHPAD_TOKEN_UAT`
+
+A Github secret containing Launchpad token for uat. We recommend this 
+is stored in a Github Secret.
+
+### `LAUNCHPAD_TOKEN_OPS`
+
+A Github secret containing Launchpad token for ops. We recommend this 
 is stored in a Github Secret.
 
 ## Example usage
@@ -62,5 +72,7 @@ is stored in a Github Secret.
   env:
     cmr_user: ${{secrets.CMR_USER}}
     cmr_pass: ${{secrets.CMR_PASS}}
-    token: ${{secrets.TOKEN}}
+    LAUNCHPAD_TOKEN_SIT: ${{secrets.LAUNCHPAD_TOKEN_SIT}}
+    LAUNCHPAD_TOKEN_UAT: ${{secrets.LAUNCHPAD_TOKEN_UAT}}
+    LAUNCHPAD_TOKEN_OPS: ${{secrets.LAUNCHPAD_TOKEN_OPS}}
 ```
