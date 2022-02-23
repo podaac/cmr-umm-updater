@@ -16,6 +16,14 @@ if [[ $env == "sit" || $env == "uat" ]]; then
   jq --arg a "https://harmony.uat.earthdata.nasa.gov" '.URL.URLValue = $a' cmr/cmr.json > cmr/cmr.json.tmp && mv cmr/cmr.json.tmp cmr/cmr.json
 fi
 
-umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -cu $cmr_user -cp $cmr_pass
+if [[ "${LAUNCHPAD_TOKEN_SIT}" ]] && [[ $env == "sit" ]]; then
+  umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -t $LAUNCHPAD_TOKEN_SIT
+elif [[ "${LAUNCHPAD_TOKEN_UAT}" ]] && [[ $env == "uat" ]]; then
+  umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -t $LAUNCHPAD_TOKEN_UAT
+elif [[ "${LAUNCHPAD_TOKEN_OPS}" ]] && [[ $env == "ops" ]]; then
+  umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -t $LAUNCHPAD_TOKEN_OPS
+else
+  umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p POCLOUD -e ${env} -cu $cmr_user -cp $cmr_pass
+fi
 
 set -x
