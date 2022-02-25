@@ -7,7 +7,7 @@ file=$1
 provider=$2
 env=$3
 version=$4
-timeout=${5:-60}
+timeout=${5:-30}
 
 # Replace version placeholder with actual version
 jq --arg a $version '.Version = $a' $file > "cmr/cmr.json"
