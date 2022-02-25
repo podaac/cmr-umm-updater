@@ -28,6 +28,9 @@ to. Should be `uat`, `sit`, or `ops`
 **Required** The version of the service. Will be substituted in to the 
 UMM-S JSON before pushing to CMR.
 
+### `timeout`
+**Optional** API request timeout length
+
 ## Environment variables
 
 **Required** Either cmr_user and cmr_pass or token for each environment `sit` `uat` `ops`
