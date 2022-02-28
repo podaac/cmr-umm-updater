@@ -51,7 +51,7 @@ def current_association(concept_id, url_prefix, header, timeout=30):
     List of string with concept id or None
     """
 
-    url = "{}/search/collections.umm_json?tool_concept_id={}".format(url_prefix, concept_id)
+    url = "{}/search/collections.umm_json?tool_concept_id={}&page_size=2000".format(url_prefix, concept_id)
     resp = get(url, headers=header, timeout=timeout)
     if resp.status_code == 200:
         resp_json = json.loads(resp.text)
