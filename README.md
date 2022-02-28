@@ -29,7 +29,7 @@ to. Should be `uat`, `sit`, or `ops`
 UMM-S JSON before pushing to CMR.
 
 ### `timeout`
-**Optional** API request timeout length
+**Optional** API request timeout length in seconds.
 
 ## Environment variables
 
