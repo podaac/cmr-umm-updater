@@ -40,7 +40,7 @@ def cmr_environment_url(env):
 
 
 @backoff.on_predicate(backoff.fibo, lambda x: x is None, max_tries=10)
-def get_current_service(cmr_env, concept_id):
+def get_current_service(cmr_env, concept_id, timeout=30):
     """
     Pull current UMM-S profile
     Parameters
@@ -57,7 +57,7 @@ def get_current_service(cmr_env, concept_id):
     try:
         req = get(url_prefix + f"/search/"
                   f"services.umm_json"
-                  f"?concept_id={concept_id}&pretty=true")
+                  f"?concept_id={concept_id}&pretty=true", timeout=timeout)
         LOGGER.debug("Response text from get_current_service: %s", req.text)
         current_umms = req.json()
     except exceptions.HTTPError as err:
@@ -71,7 +71,7 @@ def get_current_service(cmr_env, concept_id):
     return current_umms
 
 
-def create_service(cmr_env, local_umms, provider, native_id, header):
+def create_service(cmr_env, local_umms, provider, native_id, header, timeout=30):
     """
     Creates new UMM-S Service and returns confirmation xml
     Parameters
@@ -94,7 +94,7 @@ def create_service(cmr_env, local_umms, provider, native_id, header):
                        f"{provider}/services/{native_id}"
     LOGGER.debug("URL used to create_service: %s", url)
     try:
-        req = put(url, json=local_umms, headers=header)
+        req = put(url, json=local_umms, headers=header, timeout=timeout)
         LOGGER.info("Response from create_service: %s", req.text)
         req.raise_for_status()
     except exceptions.HTTPError as err:
@@ -103,7 +103,7 @@ def create_service(cmr_env, local_umms, provider, native_id, header):
     return req
 
 
-def delete_service(cmr_env, provider, native_id, header):
+def delete_service(cmr_env, provider, native_id, header, timeout=30):
     """
     Deletes existing UMM-S Service and returns confirmation xml
     Parameters
@@ -125,7 +125,7 @@ def delete_service(cmr_env, provider, native_id, header):
                        f"{provider}/services/{native_id}"
     LOGGER.info("URL used to delete_service: %s", url)
     try:
-        req = delete(url, headers=header)
+        req = delete(url, headers=header, timeout=timeout)
         LOGGER.info("Response from delete_service: %s", req.text)
         req.raise_for_status()
     except exceptions.HTTPError as err:

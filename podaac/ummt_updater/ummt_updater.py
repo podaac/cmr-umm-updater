@@ -95,6 +95,11 @@ def parse_args():
                         default=None,
                         metavar='associations.txt')
 
+    parser.add_argument('-to', '--timeout',
+                        help='Set timeout on requests',
+                        required=False, type=int,
+                        default=30)
+
     args = parser.parse_args()
     if not args.token and not(args.cmr_pass and args.cmr_user):
         parser.error('No credentials provided, add -t or -cu and -cp')
@@ -124,7 +129,7 @@ def create_native_id(provider, ummt_json):
 
 
 @backoff.on_predicate(backoff.fibo, lambda x: x is None, max_tries=10)
-def pull_concept_id(cmr_env, provider, native_id):
+def pull_concept_id(cmr_env, provider, native_id, timeout=30):
     """
     Uses constructed native_id, cmr environment and provider string to
     pull concept_id for UMM-T record on CMR.
@@ -142,7 +147,7 @@ def pull_concept_id(cmr_env, provider, native_id):
     url_prefix = tool_update.cmr_environment_url(cmr_env)
     url = url_prefix + f"/search/tools.json" \
                        f"?provider={provider}&native_id={native_id}"
-    req = requests.get(url)
+    req = requests.get(url, timeout=timeout)
     tool = json.loads(req.text)
 
     if tool['hits'] == 1:
@@ -189,7 +194,7 @@ def main(args):
     provider = args.provider
     header = {
         'Content-type': "application/vnd.nasa.cmr.umm+json;version=1.0",
-        'Echo-Token': str(current_token),
+        'Authorization': str(current_token),
     }
 
     with open(args.jfilename) as json_file:
@@ -199,22 +204,22 @@ def main(args):
         native_id = create_native_id(provider, local_ummt)
         logging.info("native_id: %s", native_id)
 
-        concept_id = pull_concept_id(args.env, provider, native_id)
+        concept_id = pull_concept_id(args.env, provider, native_id, timeout=args.timeout)
 
         if concept_id is None:
 
             logging.info("No CMR profile found. Creating new UMM-T record...")
 
             tool_update.create_tool(
-                args.env, local_ummt, provider, native_id, header
+                args.env, local_ummt, provider, native_id, header, timeout=args.timeout
             )
-            new_concept_id = pull_concept_id(args.env, provider, native_id)
+            new_concept_id = pull_concept_id(args.env, provider, native_id, timeout=args.timeout)
 
             logging.info("concept_id: %s", concept_id)
             logging.info("New CMR UMM-T Profile:")
 
             updated_ummt = tool_update.get_current_tool(
-                args.env, new_concept_id
+                args.env, new_concept_id, timeout=args.timeout
             )
 
             logging.info(json.dumps(
@@ -226,13 +231,13 @@ def main(args):
             # check for associations to be made with UMM-T profile
             if args.assoc is not None:
                 create_assoc.create_association(
-                    args.env, new_concept_id, current_token, args.assoc
+                    args.env, new_concept_id, current_token, args.assoc, timeout=args.timeout
                 )
         else:
             logging.info("concept_id: %s", concept_id)
 
             # Display current CMR UMM-T profile
-            current_ummt = tool_update.get_current_tool(args.env, concept_id)
+            current_ummt = tool_update.get_current_tool(args.env, concept_id, timeout=args.timeout)
             logging.info("CMR UMM-T Profile:")
             logging.info(json.dumps(
                 current_ummt,
@@ -251,19 +256,19 @@ def main(args):
                 logging.info("CMR and local profiles match, no update needed.")
                 logging.info("Synchronize associations...")
                 if args.assoc is not None:
-                    create_assoc.sync_association(args.env, concept_id, current_token, args.assoc)
+                    create_assoc.sync_association(args.env, concept_id, current_token, args.assoc, timeout=args.timeout)
             else:
                 logging.info("Updating CMR UMM-T profile...")
 
                 tool_update.create_tool(
-                    args.env, local_ummt, provider, native_id, header
+                    args.env, local_ummt, provider, native_id, header, timeout=args.timeout
                 )
                 logging.info("Updated CMR Profile:")
 
                 # Need to sleep 10 seconds so there is time for the cmr to update.
                 time.sleep(10)
                 updated_ummt = tool_update.get_current_tool(
-                    args.env, concept_id
+                    args.env, concept_id, timeout=args.timeout
                 )
 
                 logging.info(json.dumps(
@@ -275,7 +280,7 @@ def main(args):
                 # check for associations to be made with UMM-T profile
                 if args.assoc is not None:
                     create_assoc.sync_association(
-                        args.env, concept_id, current_token, args.assoc
+                        args.env, concept_id, current_token, args.assoc, timeout=args.timeout
                     )
 
 

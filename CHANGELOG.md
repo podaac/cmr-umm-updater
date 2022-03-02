@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Timeout argument in umm updater to control api request timeout
+- [issue-9](https://github.com/podaac/cmr-umm-updater/issues/9): Change token header to Authorization
+
 ### Changed 
 ### Deprecated 
 ### Removed 
