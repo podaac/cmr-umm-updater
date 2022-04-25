@@ -1,5 +1,5 @@
 # cmr-publish-umms-action
-Github Action to publish UMM-S and UMM-S collection associations to CMR.
+Github Action to publish UMM-S and UMM-T collection associations to CMR.
 
 ## Project Structure
 
