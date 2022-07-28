@@ -106,14 +106,15 @@ def sync_association(cmr_env, concept_id, current_token, association, timeout=30
                             "may not be valid: %s", assoc_concept_id)
 
         LOGGER.info("Allow association removal: %s", remove_collection)
-        for assoc_concept_id in remove and remove_collection:
-            resp = remove_association(url_prefix, concept_id, assoc_concept_id, header, timeout=timeout)
-            LOGGER.info("Remove Association %s: response status: %s",
-                        assoc_concept_id, resp.status_code)
-            LOGGER.info("Response text from remove_associations: %s", resp.text)
-            if resp.status_code != 200:
-                LOGGER.info("Failed remove association: concept_id being associated "
-                            "may not be valid: %s", assoc_concept_id)
+        if remove_collection:
+            for assoc_concept_id in remove:
+                resp = remove_association(url_prefix, concept_id, assoc_concept_id, header, timeout=timeout)
+                LOGGER.info("Remove Association %s: response status: %s",
+                            assoc_concept_id, resp.status_code)
+                LOGGER.info("Response text from remove_associations: %s", resp.text)
+                if resp.status_code != 200:
+                    LOGGER.info("Failed remove association: concept_id being associated "
+                                "may not be valid: %s", assoc_concept_id)
     else:
         LOGGER.info("All association is the same")
 
