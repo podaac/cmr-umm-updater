@@ -63,7 +63,7 @@ def current_association(concept_id, url_prefix, header, timeout=30):
     return None
 
 
-def sync_association(cmr_env, concept_id, current_token, association, timeout=30, remove_association: bool=True):
+def sync_association(cmr_env, concept_id, current_token, association, timeout=30, remove_collection: bool=True):
     """
     Synchronize association file with cmr associations
     Parameters
@@ -72,7 +72,7 @@ def sync_association(cmr_env, concept_id, current_token, association, timeout=30
     concept_id : string concept id of service
     current_token : string cmr token
     association : string file with all associations
-    remove_association : bool to remove associations from cmr or not during sync
+    remove_collection : bool to remove associations from cmr or not during sync
     Returns
     -------
     None
@@ -105,8 +105,8 @@ def sync_association(cmr_env, concept_id, current_token, association, timeout=30
                 LOGGER.info("Failed add association: concept_id being associated "
                             "may not be valid: %s", assoc_concept_id)
 
-        LOGGER.info("Allow association removal: %s", remove_association)
-        for assoc_concept_id in remove and remove_association:
+        LOGGER.info("Allow association removal: %s", remove_collection)
+        for assoc_concept_id in remove and remove_collection:
             resp = remove_association(url_prefix, concept_id, assoc_concept_id, header, timeout=timeout)
             LOGGER.info("Remove Association %s: response status: %s",
                         assoc_concept_id, resp.status_code)

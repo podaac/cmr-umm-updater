@@ -252,7 +252,7 @@ def main(args):
             if sorted(current_umms.items()) == sorted(local_umms.items()):
                 logging.info("CMR and local profiles match, no update needed.")
                 if args.assoc is not None:
-                    create_assoc.sync_association(args.env, concept_id, current_token, args.assoc, timeout=args.timeout, remove_association=args.disable_removal)
+                    create_assoc.sync_association(args.env, concept_id, current_token, args.assoc, timeout=args.timeout, remove_collection=args.disable_removal)
             else:
                 logging.info("Updating CMR UMM-S profile...")
 
@@ -273,7 +273,7 @@ def main(args):
                 # check for associations to be made with UMM-S profile
                 if args.assoc is not None:
                     create_assoc.sync_association(
-                        args.env, concept_id, current_token, args.assoc, timeout=args.timeout, remove_association=args.disable_removal
+                        args.env, concept_id, current_token, args.assoc, timeout=args.timeout, remove_collection=args.disable_removal
                     )
 
 
