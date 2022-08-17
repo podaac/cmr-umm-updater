@@ -13,6 +13,10 @@ inputs:
   version:
     description: 'Service version to be substituted in to UMM-S entry'
     required: true
+  disable_removal:
+    description: 'Disable CMR association removal during sync event'
+    required: true
+    default: 'true'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -21,3 +25,4 @@ runs:
     - ${{inputs.provider}}
     - ${{inputs.env}}
     - ${{inputs.version}}
+    - ${{inputs.disable_removal}}

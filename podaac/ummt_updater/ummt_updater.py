@@ -99,6 +99,10 @@ def parse_args():
                         help='Set timeout on requests',
                         required=False, type=int,
                         default=30)
+    
+    parser.add_argument('-r', '--disable_removal', action='store_false',
+                        help='Disable CMR association removal during sync event',
+                        required=False)
 
     args = parser.parse_args()
     if not args.token and not(args.cmr_pass and args.cmr_user):
@@ -254,9 +258,8 @@ def main(args):
             # Compare CMR UMM-T to locally maintained UMM-T profile
             if sorted(current_ummt.items()) == sorted(local_ummt.items()):
                 logging.info("CMR and local profiles match, no update needed.")
-                logging.info("Synchronize associations...")
                 if args.assoc is not None:
-                    create_assoc.sync_association(args.env, concept_id, current_token, args.assoc, timeout=args.timeout)
+                    create_assoc.sync_association(args.env, concept_id, current_token, args.assoc, timeout=args.timeout, remove_collection=args.disable_removal)
             else:
                 logging.info("Updating CMR UMM-T profile...")
 
@@ -280,7 +283,7 @@ def main(args):
                 # check for associations to be made with UMM-T profile
                 if args.assoc is not None:
                     create_assoc.sync_association(
-                        args.env, concept_id, current_token, args.assoc, timeout=args.timeout
+                        args.env, concept_id, current_token, args.assoc, timeout=args.timeout, remove_collection=args.disable_removal
                     )
 
 
