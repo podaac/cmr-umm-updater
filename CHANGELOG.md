@@ -13,6 +13,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security
 
+## [0.2.3]
+
+### Added
+### Changed
+- **fix-push-tag**
+  - Build pipeline manually pushes tag rather than use action-push-tag
+### Deprecated 
+### Removed 
+### Fixed 
+### Security
+
 ## [0.2.2]
 
 ### Added
