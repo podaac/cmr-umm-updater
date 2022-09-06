@@ -1,19 +1,39 @@
-# Container image that runs your code
-FROM python:3.9-slim
+# Base container image used for both build and runtime
+FROM python:3.9-slim AS base
 
+SHELL ["/bin/bash", "-c"]
+
+# Update packages
 RUN apt-get update \
-    && apt-get install -y jq \
-    && rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
+    && apt-get clean \
+    && python -m pip install --upgrade pip
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /entrypoint.sh
+# Container image used to build the project
+FROM base as builder
 
-# Copy source into container
-RUN mkdir /podaac-umm-publisher
+# Disable pip version check and cache, set poetry version
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    POETRY_VERSION=1.2.0
+
+# Build code using poetry
+RUN apt-get install -y --no-install-recommends gcc
+RUN pip install "poetry==$POETRY_VERSION"
+RUN python -m venv /venv
+# Install wheel into virtual environment to make it easy to copy
 COPY . .
+RUN poetry build && /venv/bin/pip install dist/*.whl
 
-# Install umm updater tool
-RUN python -m pip install --upgrade pip && pip install . 
+# Container image used at runtime
+FROM base as final
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
+# Need jq at runtime
+RUN apt-get install -y --no-install-recommends jq \
+    && apt-get clean
+# Copy virtual environment with software installed
+COPY --from=builder /venv /venv
+ENV PATH="/venv/bin:${PATH}" \
+    VIRTUAL_ENV="/venv"
+COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
