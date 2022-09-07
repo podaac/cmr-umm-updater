@@ -13,6 +13,10 @@ inputs:
   version:
     description: 'Service version to be substituted in to UMM-S entry'
     required: true
+  timeout:
+    description: 'Set timeout on requests'
+    required: false
+    default: 30
   disable_removal:
     description: 'Disable CMR association removal during sync event'
     required: true
@@ -25,4 +29,5 @@ runs:
     - ${{inputs.provider}}
     - ${{inputs.env}}
     - ${{inputs.version}}
+    - ${{inputs.timeout}}
     - ${{inputs.disable_removal}}

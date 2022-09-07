@@ -1,12 +1,12 @@
-#!/bin/bash -l
+#!/usr/bin/env bash
 
-set -Exo pipefail
-set +x
+set -Eeo pipefail
 
 file=$1
 provider=$2
 env=$3
 version=$4
+# ":-30" means If not set, use 30 as default
 timeout=${5:-30}
 disable_removal=$6
 
@@ -18,7 +18,7 @@ if [[ $env == "sit" || $env == "uat" ]]; then
   jq --arg a "https://harmony.uat.earthdata.nasa.gov" '.URL.URLValue = $a' cmr/cmr.json > cmr/cmr.json.tmp && mv cmr/cmr.json.tmp cmr/cmr.json
 fi
 
-if disable_removal == 'true'; then
+if [[ $disable_removal == "true" ]]; then
   if [[ "${LAUNCHPAD_TOKEN_SIT}" ]] && [[ $env == "sit" ]]; then
     umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p ${provider} -e ${env} -t $LAUNCHPAD_TOKEN_SIT -to $timeout -r
   elif [[ "${LAUNCHPAD_TOKEN_UAT}" ]] && [[ $env == "uat" ]]; then
@@ -39,5 +39,3 @@ else
     umms_updater -d -f cmr/cmr.json -a cmr/${env}_associations.txt -p ${provider} -e ${env} -cu $cmr_user -cp $cmr_pass -to $timeout
   fi
 fi
-
-set -x

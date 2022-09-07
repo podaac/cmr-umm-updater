@@ -7,10 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-### Changed 
-### Deprecated 
-### Removed 
-### Fixed 
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.3.0]
+
+### Added
+### Changed
+- [issues/16](https://github.com/podaac/cmr-umm-updater/issues/16) Switched to using multi container Docker build so `gcc` can be used during build but is not included in final image
+### Deprecated
+### Removed
+### Fixed
 ### Security
 
 ## [0.2.3]
@@ -19,9 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **fix-push-tag**
   - Build pipeline manually pushes tag rather than use action-push-tag
-### Deprecated 
-### Removed 
-### Fixed 
+### Deprecated
+### Removed
+### Fixed
 ### Security
 
 ## [0.2.2]
@@ -29,10 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **PODAAC-4657**
   - Added argument to disable association removal from CMR during association sync
-### Changed 
-### Deprecated 
-### Removed 
-### Fixed 
+### Changed
+### Deprecated
+### Removed
+### Fixed
 ### Security
 
 ## [0.2.1]
@@ -41,10 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Timeout argument in umm updater to control api request timeout
 - [issue-9](https://github.com/podaac/cmr-umm-updater/issues/9): Change token header to Authorization
 
-### Changed 
-### Deprecated 
-### Removed 
-### Fixed 
+### Changed
+### Deprecated
+### Removed
+### Fixed
 ### Security
 
 ## [0.2.0]
@@ -63,8 +73,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial commit of UMM-S updater Github Action
-### Changed 
-### Deprecated 
-### Removed 
-### Fixed 
+### Changed
+### Deprecated
+### Removed
+### Fixed
 ### Security
