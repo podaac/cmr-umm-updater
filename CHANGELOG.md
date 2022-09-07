@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 ### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [0.3.0]
+
+### Added
+### Changed
 - [issues/16](https://github.com/podaac/cmr-umm-updater/issues/16) Switched to using multi container Docker build so `gcc` can be used during build but is not included in final image
 ### Deprecated
 ### Removed
