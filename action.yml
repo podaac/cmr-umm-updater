@@ -1,33 +1,55 @@
-name: 'UMM-S Updater'
-description: 'Publish UMM-S updates to CMR'
+name: 'UMM Updater'
+description: 'Publish UMM updates to CMR'
 inputs:
-  umm-s-json:
-    description: 'JSON file containing new UMM-S contents'
+  umm-json:
+    description: 'JSON file containing new UMM contents'
     required: true
+    type: string
   provider:
     description: 'CMR Provider ID'
     required: true
+    type: string
   env:
-    description: 'Venue to update UMM-S in'
+    description: 'Venue to update UMM in'
     required: true
+    type: choice
+    options:
+      - 'sit'
+      - 'uat'
+      - 'ops'
   version:
-    description: 'Service version to be substituted in to UMM-S entry'
+    description: 'Service version to be substituted in to UMM entry'
     required: true
+    type: string
   timeout:
     description: 'Set timeout on requests'
     required: false
     default: 30
+    type: integer
   disable_removal:
     description: 'Disable CMR association removal during sync event'
-    required: true
+    required: false
     default: 'true'
+    type: choice
+    options:
+      - 'true'
+      - 'false'
+  umm_type:
+    description: "Either call umm-s or umm-t to update"
+    required: false
+    default: 'umm-s'
+    type: choice
+    options:
+      - 'umm-s'
+      - 'umm-t'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{inputs.umm-s-json}}
+    - ${{inputs.umm-json}}
     - ${{inputs.provider}}
     - ${{inputs.env}}
     - ${{inputs.version}}
     - ${{inputs.timeout}}
     - ${{inputs.disable_removal}}
+    - ${{inputs.umm_type}}
