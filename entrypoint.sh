@@ -9,6 +9,7 @@ version=$4
 # ":-30" means If not set, use 30 as default
 timeout=${5:-30}
 disable_removal=$6
+umm_type=$7
 
 # Replace version placeholder with actual version
 jq --arg a $version '.Version = $a' $file > "cmr/cmr.json"
