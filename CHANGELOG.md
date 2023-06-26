@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Add UMM-T**
-  - Add umm-t updater as an option when calling umm updater
+- **Add Association file optional**
+  - Make association file optional when using umm updater
 ### Changed
 ### Deprecated
 ### Removed
