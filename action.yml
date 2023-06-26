@@ -45,7 +45,7 @@ inputs:
   use_associations:
     description: 'Determine to update cmr with association file'
     required: false
-    default: 'false'
+    default: 'true'
     type: choice
     options:
       - 'true'

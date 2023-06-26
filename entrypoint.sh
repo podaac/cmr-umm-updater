@@ -9,7 +9,7 @@ version=$4
 timeout=${5:-30}
 disable_removal=$6
 umm_type=$7
-use_associations=${8:-false}
+use_associations=${8:-true}
 
 # Replace version placeholder with actual version
 jq --arg a $version '.Version = $a' "$file" > "cmr/cmr.json"
