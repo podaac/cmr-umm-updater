@@ -35,21 +35,21 @@ if [[ $umm_type == "umm-t" ]]; then
 fi
 
 # Append additional options based on disable_removal value
-if [[ $disable_removal == "true" ]]; then
-  command+=" -r"
-fi
+#if [[ $disable_removal == "true" ]]; then
+#  command+=" -r"
+#fi
 
 # Execute the command
 if [[ -n $launchpad_token ]]; then
   if [[ $use_associations == "true" ]]; then
-    "$command" -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass"
+    "$command" -r -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass"
   else
-    "$command" -d -f "cmr/cmr.json" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass"
+    "$command" -r -d -f "cmr/cmr.json" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass"
   fi
 else
   if [[ $use_associations == "true" ]]; then
-    "$command" -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout"
+    "$command" -r -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout"
   else
-    "$command" -d -f "cmr/cmr.json" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout"
+    "$command" -r -d -f "cmr/cmr.json" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout"
   fi
 fi
