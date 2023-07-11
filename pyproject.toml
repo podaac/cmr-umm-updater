@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cmr-umm-updater"
-version = "0.5.0a4"
+version = "0.5.0a5"
 description = "Github action that publishes UMM-S and UMM-T updates to CMR"
 authors = ["podaac-cloud-tva <podaac-cloud-tva@jpl.nasa.gov>"]
 license = "Apache-2.0"
