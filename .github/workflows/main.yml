@@ -17,18 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: 3.8
+          python-version: 3.9
       - name: Install Poetry
-        uses: abatilo/actions-poetry@v2.0.0
+        uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: 1.3.2
+          poetry-version: 1.5.1
       - name: Get version
         id: get-version
         run: |
-          echo "::set-output name=current_version::$(poetry version | awk '{print $2}')"
+          echo "name=current_version::$(poetry version | awk '{print $2}')" >> $GITHUB_OUTPUT
           echo "pyproject_name=$(poetry version | awk '{print $1}')" >> $GITHUB_ENV
       - name: Bump pre-alpha version
         # If triggered by push to a feature branch
