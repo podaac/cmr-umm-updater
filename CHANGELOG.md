@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [0.5.0]
+
+### Added
+- **Add Association file optional**
+  - Make association file optional when using umm updater
+
 ## [0.4.0]
 
 ### Added

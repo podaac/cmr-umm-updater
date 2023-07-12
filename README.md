@@ -37,6 +37,9 @@ Disable CMR association removal during sync event
 ### `umm_type`
 Either update a umm-s or umm-t in umm defaults to umm-s
 
+### `use_associations`
+To use a association file to add collections to umm
+
 ## Environment variables
 
 **Required** Either cmr_user and cmr_pass or token for each environment `sit` `uat` `ops`

@@ -42,6 +42,14 @@ inputs:
     options:
       - 'umm-s'
       - 'umm-t'
+  use_associations:
+    description: 'Determine to update cmr with association file'
+    required: false
+    default: 'true'
+    type: choice
+    options:
+      - 'true'
+      - 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -53,3 +61,4 @@ runs:
     - ${{inputs.timeout}}
     - ${{inputs.disable_removal}}
     - ${{inputs.umm_type}}
+    - ${{inputs.use_associations}}
