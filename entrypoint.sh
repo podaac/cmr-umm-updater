@@ -10,6 +10,7 @@ timeout=${5:-30}
 disable_removal=$6
 umm_type=$7
 use_associations=${8:-true}
+umm_version=$9
 
 # Replace version placeholder with actual version
 jq --arg a $version '.Version = $a' "$file" > "cmr/cmr.json"
@@ -42,14 +43,14 @@ fi
 # Execute the command
 if [[ -n $launchpad_token ]]; then
   if [[ $use_associations == "true" ]]; then
-    $command -r -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass"
+    $command -r -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass" -uv "$umm_version"
   else
-    $command -r -d -f "cmr/cmr.json" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass"
+    $command -r -d -f "cmr/cmr.json" -p "$provider" -e "$env" -t "$launchpad_token" -to "$timeout" -cu "$cmr_user" -cp "$cmr_pass" -uv "$umm_version"
   fi
 else
   if [[ $use_associations == "true" ]]; then
-    $command -r -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout"
+    $command -r -d -f "cmr/cmr.json" -a "cmr/${env}_associations.txt" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout" -uv "$umm_version"
   else
-    $command -r -d -f "cmr/cmr.json" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout"
+    $command -r -d -f "cmr/cmr.json" -p "$provider" -e "$env" -cu "$cmr_user" -cp "$cmr_pass" -to "$timeout" -uv "$umm_version"
   fi
 fi
