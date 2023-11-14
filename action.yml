@@ -50,6 +50,12 @@ inputs:
     options:
       - 'true'
       - 'false'
+  umm_version:
+    description: "umm schema version"
+    required: false
+    default: ''
+    type: string
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -62,3 +68,5 @@ runs:
     - ${{inputs.disable_removal}}
     - ${{inputs.umm_type}}
     - ${{inputs.use_associations}}
+    - ${{inputs.umm_version}}
+

@@ -63,7 +63,7 @@ def current_association(concept_id, url_prefix, header, timeout=30):
     return None
 
 
-def sync_association(cmr_env, concept_id, current_token, association, timeout=30, remove_collection: bool=True):
+def sync_association(cmr_env, concept_id, current_token, association, timeout=30, remove_collection: bool = True):
     """
     Synchronize association file with cmr associations
     Parameters
