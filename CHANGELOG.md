@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Add UMM version argument**
+  - Add umm version argument to set the desired umm version
 ### Changed
 ### Deprecated
 ### Removed
