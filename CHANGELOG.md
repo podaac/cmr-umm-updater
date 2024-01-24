@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [0.6.0]
+
+### Added
+- **Add UMM version argument**
+  - Add umm version argument to set the desired umm version
+
 ## [0.5.0]
 
 ### Added

@@ -44,7 +44,7 @@ def token(cmr_env, cmr_user, cmr_pass):
                    f"\"password\":\"{cmr_pass}\",\"client_id\":\"client\"," \
                    f"\"user_ip_address\":\"{ip_address}\"}}}}"
     try:
-        req = post(url, json=json.loads(json_payload), headers=header)
+        req = post(url, json=json.loads(json_payload), headers=header, timeout=120)
         LOGGER.debug("Response from request for token: %s", req.text)
         req.raise_for_status()
     except exceptions.HTTPError as err:

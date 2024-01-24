@@ -99,10 +99,15 @@ def parse_args():
                         help='Set timeout on requests',
                         required=False, type=int,
                         default=30)
-    
+
     parser.add_argument('-r', '--disable_removal', action='store_false',
                         help='Disable CMR association removal during sync event',
                         required=False)
+
+    parser.add_argument('-uv', '--umm_version',
+                        help='umm version were trying to update',
+                        required=False,
+                        default="1.3.4")
 
     args = parser.parse_args()
     if not args.token and not(args.cmr_pass and args.cmr_user):
@@ -194,8 +199,12 @@ def main(args):
         current_token = args.token
 
     provider = args.provider
+    umm_version = args.umm_version
+    if not umm_version:
+        umm_version = '1.3.4'
+
     header = {
-        'Content-type': "application/vnd.nasa.cmr.umm+json;version=1.3.4",
+        'Content-type': f'application/vnd.nasa.cmr.umm+json;version={umm_version}',
         'Authorization': str(current_token),
     }
 
