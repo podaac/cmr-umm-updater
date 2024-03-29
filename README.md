@@ -40,6 +40,12 @@ Either update a umm-s or umm-t in umm defaults to umm-s
 ### `use_associations`
 To use a association file to add collections to umm
 
+### `umm_version`
+Version of the umm schema to use during updates. Defaults to '1.3.4'
+
+### `url_value`
+Value to substitute for the `.URL.URLValue` key in the umm record. Defaults to environment specific harmony URL
+
 ## Environment variables
 
 **Required** Either cmr_user and cmr_pass or token for each environment `sit` `uat` `ops`
