@@ -110,7 +110,7 @@ def parse_args():
                         default="1.3.4")
 
     args = parser.parse_args()
-    if not args.token and not(args.cmr_pass and args.cmr_user):
+    if not args.token and not (args.cmr_pass and args.cmr_user):
         parser.error('No credentials provided, add -t or -cu and -cp')
     return args
 
