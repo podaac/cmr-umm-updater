@@ -1,5 +1,5 @@
 # Base container image used for both build and runtime
-FROM python:3.9-slim AS base
+FROM python:3.12-slim AS base
 
 SHELL ["/bin/bash", "-c"]
 
@@ -15,7 +15,7 @@ FROM base as builder
 # Disable pip version check and cache, set poetry version
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
-    POETRY_VERSION=1.2.0
+    POETRY_VERSION=1.7.1
 
 # Build code using poetry
 RUN apt-get install -y --no-install-recommends gcc

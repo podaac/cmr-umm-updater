@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+ - [issues/26](https://github.com/podaac/cmr-umm-updater/issues/26) Add `url_value` input parameter to allow for dynamic values in the `.URL.URLValue` umm record
 ### Changed
 ### Deprecated
 ### Removed
