@@ -106,14 +106,19 @@ jobs:
             poetry version ${GITHUB_REF#refs/heads/release/}rc1
           fi
       - name: Release version
+        id: release
         # If triggered by push to the main branch
         if: |
           startsWith(github.ref, 'refs/heads/main') &&
           steps.manual.conclusion == 'skipped'
-        id: release
+        env:
+          CURRENT_VERSION: ${{ steps.get-version.outputs.current_version }}
+        # Remove rc* from end of version string
+        # The ${string%%substring} syntax below deletes the longest match of $substring from back of $string.
         run: |
-          poetry version major
-          echo "TARGET_ENV_UPPERCASE=OPS" >> $GITHUB_ENV
+          poetry version ${CURRENT_VERSION%%rc*}
+          echo "software_version=$(poetry version | awk '{print $2}')" >> $GITHUB_ENV
+          echo "venue=ops" >> $GITHUB_ENV
       - name: Get install version
         # Get the version of the software being installed and save it as an ENV var
         run: |
