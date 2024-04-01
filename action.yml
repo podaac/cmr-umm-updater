@@ -55,6 +55,11 @@ inputs:
     required: false
     default: ''
     type: string
+  url_value:
+    description: "Value to substitute for the `.URL.URLValue` key in the umm record. Defaults to environment specific harmony URL"
+    required: false
+    default: ''
+    type: string
 
 runs:
   using: 'docker'
@@ -69,4 +74,5 @@ runs:
     - ${{inputs.umm_type}}
     - ${{inputs.use_associations}}
     - ${{inputs.umm_version}}
+    - ${{inputs.url_value}}
 

@@ -11,14 +11,22 @@ disable_removal=$6
 umm_type=$7
 use_associations=${8:-true}
 umm_version=$9
+url_value=$10
 
 # Replace version placeholder with actual version
 jq --arg a $version '.Version = $a' "$file" > "cmr/cmr.json"
 
-# Replace Harmony URL placeholder with Harmony URL based on env
-if [[ $env == "sit" || $env == "uat" ]]; then
-  jq --arg a "https://harmony.uat.earthdata.nasa.gov" '.URL.URLValue = $a' cmr/cmr.json > cmr/cmr.json.tmp && mv cmr/cmr.json.tmp cmr/cmr.json
+if [[ -n "${url_value}"]]
+if [[ $url_value ]]; then
+  jq --arg a "${url_value}" '.URL.URLValue = $a' cmr/cmr.json > cmr/cmr.json.tmp && mv cmr/cmr.json.tmp cmr/cmr.json
+else
+  # Replace Harmony URL placeholder with Harmony URL based on env
+  if [[ $env == "sit" || $env == "uat" ]]; then
+    jq --arg a "https://harmony.uat.earthdata.nasa.gov" '.URL.URLValue = $a' cmr/cmr.json > cmr/cmr.json.tmp && mv cmr/cmr.json.tmp cmr/cmr.json
+  fi
 fi
+
+
 
 launchpad_token=""
 if [[ $env == "sit" && -n "${LAUNCHPAD_TOKEN_SIT}" ]]; then

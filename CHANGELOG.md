@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [0.7.0]
+
+### Added
+ - [issues/26](https://github.com/podaac/cmr-umm-updater/issues/26) Add `url_value` input parameter to allow for dynamic values in the `.URL.URLValue` umm record
+
 ## [0.6.0]
 
 ### Added
