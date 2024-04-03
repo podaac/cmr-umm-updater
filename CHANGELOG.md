@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [0.7.1]
+
+### Fixed
+ - [issues/29](https://github.com/podaac/cmr-umm-updater/issues/29) Fix syntax error in entrypoint.sh
+
 ## [0.7.0]
 
 ### Added
