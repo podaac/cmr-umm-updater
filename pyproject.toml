@@ -13,7 +13,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = "^2.22"
+requests = "^2.32"
 backoff = "^2.2.1"
 
 [tool.poetry.dev-dependencies]
