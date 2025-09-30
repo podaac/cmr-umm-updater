@@ -62,15 +62,18 @@ is stored in a Github Secret.
 
 ### `LAUNCHPAD_TOKEN_SIT`
 
-The Launchpad token for sit.  We recommend using the launchpad_token_dispenser lambda to generate this token.  Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
+The Launchpad token for sit.  We recommend using the launchpad_token_dispenser lambda to generate this token.
+Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
 
 ### `LAUNCHPAD_TOKEN_UAT`
 
-The Launchpad token for uat.  We recommend using the launchpad_token_dispenser lambda to generate this token.  Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
+The Launchpad token for uat.  We recommend using the launchpad_token_dispenser lambda to generate this token.
+Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
 
 ### `LAUNCHPAD_TOKEN_OPS`
 
-The Launchpad token for ops.  We recommend using the launchpad_token_dispenser lambda to generate this token.  Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
+The Launchpad token for ops.  We recommend using the launchpad_token_dispenser lambda to generate this token.
+Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
 
 ## Example usage
 
