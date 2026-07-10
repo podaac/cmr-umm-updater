@@ -15,7 +15,7 @@ FROM base as builder
 # Disable pip version check and cache, set poetry version
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
-    POETRY_VERSION=1.7.1
+    POETRY_VERSION=2.3.2
 
 # Build code using poetry
 RUN apt-get install -y --no-install-recommends gcc
