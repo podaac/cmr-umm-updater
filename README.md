@@ -62,18 +62,18 @@ is stored in a Github Secret.
 
 ### `LAUNCHPAD_TOKEN_SIT`
 
-A Github secret containing Launchpad token for sit. We recommend this
-is stored in a Github Secret.
+The Launchpad token for sit.  We recommend using the launchpad_token_dispenser lambda to generate this token.
+Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
 
 ### `LAUNCHPAD_TOKEN_UAT`
 
-A Github secret containing Launchpad token for uat. We recommend this
-is stored in a Github Secret.
+The Launchpad token for uat.  We recommend using the launchpad_token_dispenser lambda to generate this token.
+Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
 
 ### `LAUNCHPAD_TOKEN_OPS`
 
-A Github secret containing Launchpad token for ops. We recommend this
-is stored in a Github Secret.
+The Launchpad token for ops.  We recommend using the launchpad_token_dispenser lambda to generate this token.
+Example: [Launchpad_token_generator](https://github.com/podaac/l2ss-py/blob/87fe7973ea88192b655ae56b25b2a5af74ffd77b/.github/workflows/build-pipeline.yml#L174)
 
 ## Example usage
 
@@ -91,7 +91,7 @@ is stored in a Github Secret.
   env:
     cmr_user: ${{secrets.CMR_USER}}
     cmr_pass: ${{secrets.CMR_PASS}}
-    LAUNCHPAD_TOKEN_SIT: ${{secrets.LAUNCHPAD_TOKEN_SIT}}
-    LAUNCHPAD_TOKEN_UAT: ${{secrets.LAUNCHPAD_TOKEN_UAT}}
-    LAUNCHPAD_TOKEN_OPS: ${{secrets.LAUNCHPAD_TOKEN_OPS}}
+    LAUNCHPAD_TOKEN_SIT: ${{ steps.launchpad_token_generator.outputs.result }}
+    LAUNCHPAD_TOKEN_UAT: ${{ steps.launchpad_token_generator.outputs.result }}
+    LAUNCHPAD_TOKEN_OPS: ${{ steps.launchpad_token_generator.outputs.result }}
 ```

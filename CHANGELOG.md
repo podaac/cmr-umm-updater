@@ -13,6 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [0.8.0]
+
+### Changed
+- **Python Update**
+  - Updated to python 3.12
+- **Python Library Update**
+  - Update python libraries
+- **Github actions update**
+  - update github actions versions
+
 ## [0.7.1]
 
 ### Fixed
